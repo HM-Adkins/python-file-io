@@ -2,14 +2,6 @@
 
 import re
 
-def main():
-    import argparse
-
-    # Create a command-line parser object
-    parser = argparse.ArgumentParser()
-
-input_file = 'example_input.txt'
-word_root = 'nit'
 
 def find_words_by_root(input_file, word_root):
     """
@@ -76,6 +68,32 @@ def write_list(output_list, output_file):
              out_stream.write(f'{item}\n')
 
 
+def main():
+    import argparse
+
+    # Create a command-line parser object
+    parser = argparse.ArgumentParser()
+
+    # Add arguments to the parser
+    parser.add_argument('--input_file',
+                        type= str,
+                        default= 'origin.txt',
+                        help='A text file to be searched.')
+    parser.add_argument('--word_root',
+                        type= str,
+                        default= 'herit',
+                        help='A string of the root to be searched for.')
+    parser.add_argument('--output_file',
+                        type= str,
+                        default= 'origin_output.txt',
+                        help='A file name to write the list to.')
+    
+     # Parse the command-line arguments into a 'dict'-like container
+    args = parser.parse_args()
+
+    output_list = find_words_by_root(args.input_file, args.word_root)
+    write_list(output_list, args.output_file)
+
+
 if __name__ == '__main__':
     main()
-    output_list = find_words_by_root(input_file, word_root)
